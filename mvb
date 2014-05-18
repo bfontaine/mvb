@@ -1,0 +1,25 @@
+#! /bin/bash
+#
+# mvb -- mv back
+#
+# Usage:
+#   mvb [<options>] <path1> <path2>
+#
+
+__mvb() {
+    local args=
+
+    while true; do
+        case "$1" in
+            -*)
+                args="$args $1";
+                shift ;;
+            *)
+                break
+        esac
+    done
+
+    mv $args $2 $1
+}
+
+__mvb $*
