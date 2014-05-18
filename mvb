@@ -7,19 +7,19 @@
 #
 
 __mvb() {
-    local args=
+    local opts=
 
     while true; do
         case "$1" in
             -*)
-                args="$args $1";
+                opts="$opts $1";
                 shift ;;
             *)
                 break
         esac
     done
 
-    mv $args $2 $1
+    mv $opts $2 $1
 }
 
 __mvb $*
