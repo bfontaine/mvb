@@ -8,6 +8,8 @@
 
 __mvb() {
     local opts=
+    local a=
+    local b=
 
     while true; do
         case "$1" in
@@ -19,7 +21,26 @@ __mvb() {
         esac
     done
 
-    mv $opts $2 $1
+    a=$1
+    b=$2
+
+    # A lot of variation of the 'mv' command are possible, and only a subset of
+    # them is revertable. For example, if the command was 'mv a b' and 'b' is a
+    # directory, it can be that 'b' didn't exist before the 'mv' call and 'a'
+    # was a directory. Or 'b' can be an existing directory, and 'a' was moved
+    # in it.
+    #
+    # In the following, we assumes that if 'b' ends with a slash, it was used
+    # to move 'a' _into_ 'b/', which is not true if 'b' didn't exist
+    # previously.
+
+    # if 'b' is 'foo/' and 'a' is 'bar/qux'
+    if [ "${b##*/}" == "" ]; then
+        # then 'b' becomes 'foo/qux'
+        b="$b${a##*/}"
+    fi
+
+    mv $opts $b $a
 }
 
 __mvb $*
