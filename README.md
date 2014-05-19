@@ -26,3 +26,18 @@ This creates the `~/bin` directory if it doesn’t exist. If it’s not in your
 `PATH` you have to add it:
 
     echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+
+## Caveats
+
+A lot of `mv` variations can’t be reverted without much informations, for
+example:
+
+    mv foo/* bar/
+
+Thus, `mvb` handles only simple cases where a file is renamed/moved, but not
+complex ones involving glob patterns and directories renamming. By default,
+`mvb` runs `mv` on its (switched) arguments. If the last path ends with a
+slash, it appends the first file’s name to it before continuing.
+
+For example, `mvb foo bar` is equivalent to `mv bar foo`, while `mvb foo bar/`
+is equivalent to `mv bar/foo foo`.

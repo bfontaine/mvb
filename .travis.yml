@@ -1,0 +1,7 @@
+language: bash
+before_script:
+  - export PATH="`pwd`:$PATH"
+script:
+  - cd tests;bash ./tests.sh
+notifications:
+  email: false
