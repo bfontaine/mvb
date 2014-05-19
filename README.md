@@ -1,6 +1,6 @@
 # mvb
 
-`mvb` is a little utility to move files back.
+`mvb` is a little utility to move files back. It’s like `mv`, but reversed.
 
 Have you ever moved the wrong file with `mv`, and edited your previous command
 to mv back the file? With `mvb`, all you need to do is to re-run your command
