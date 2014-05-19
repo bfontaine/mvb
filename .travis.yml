@@ -1,5 +1,6 @@
 language: bash
 before_script:
+  - sudo apt-get install -qq bc
   - export PATH="`pwd`:$PATH"
 script:
   - cd tests;bash ./tests.sh
