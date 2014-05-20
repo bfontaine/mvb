@@ -8,8 +8,9 @@
 
 __mvb() {
     local opts=
-    local a=
-    local b=
+    local from=
+    local to=
+    local in_dir=0
 
     while true; do
         case "$1" in
@@ -17,12 +18,12 @@ __mvb() {
                 opts="$opts $1";
                 shift ;;
             *)
-                break
+                [ -z "$1" ] && break;
+                from="$from $to";
+                to="$1";
+                shift ;;
         esac
     done
-
-    a=$1
-    b=$2
 
     # A lot of variation of the 'mv' command are possible, and only a subset of
     # them is revertable. For example, if the command was 'mv a b' and 'b' is a
@@ -34,13 +35,19 @@ __mvb() {
     # to move 'a' _into_ 'b/', which is not true if 'b' didn't exist
     # previously.
 
-    # if 'b' is 'foo/' and 'a' is 'bar/qux'
-    if [ "${b##*/}" == "" ]; then
-        # then 'b' becomes 'foo/qux'
-        b="$b${a##*/}"
+    # if 'to' is 'foo/' and 'from' is 'qux'
+    if [ "${to##*/}" == "" ]; then
+        # then 'to' becomes 'foo/qux'
+        in_dir=1
     fi
 
-    mv $opts $b $a
+    for f in $from; do
+        if [ $in_dir -eq 1 ]; then
+            mv $opts $to${f##*/} $f;
+        else
+            mv $opts $to $f;
+        fi
+    done
 }
 
 __mvb $*
