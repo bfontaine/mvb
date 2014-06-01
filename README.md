@@ -27,6 +27,13 @@ This creates the `~/bin` directory if it doesn’t exist. If it’s not in your
 
     echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
 
+### Using Homebrew
+
+On OS X with [Homebrew](http://brew.sh/), use:
+
+    brew tap bfontaine/utils
+    brew install mvb
+
 ## Caveats
 
 A lot of `mv` variations can’t be reverted without much informations, for
