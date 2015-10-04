@@ -31,8 +31,7 @@ This creates the `~/bin` directory if it doesn’t exist. If it’s not in your
 
 On OS X with [Homebrew](http://brew.sh/), use:
 
-    brew tap bfontaine/utils
-    brew install mvb
+    brew install bfontaine/utils/mvb
 
 ## Caveats
 
@@ -41,10 +40,10 @@ example:
 
     mv foo/* bar/
 
-Thus, `mvb` handles only simple cases where a file is renamed/moved, but not
-complex ones involving glob patterns and directories renamming. By default,
+Thus, `mvb` handles only simple cases where a file is renamed/moved; not
+complex ones involving glob patterns and directories renaming. By default,
 `mvb` runs `mv` on its (switched) arguments. If the last path ends with a
 slash, it appends the first file’s name to it before continuing.
 
-For example, `mvb foo bar` is equivalent to `mv bar foo`, while `mvb foo bar/`
+For example, `mvb foo bar` is equivalent to `mv bar foo`; while `mvb foo bar/`
 is equivalent to `mv bar/foo foo`.
